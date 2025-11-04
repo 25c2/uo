@@ -29,19 +29,30 @@ body {
   font-size: var(--size);
   line-height: 1;
   letter-spacing: 0.02em;
-  background: linear-gradient(90deg, red, orange, yellow, lime, cyan, blue, magenta);
+  background: linear-gradient(
+    90deg,
+    #ff004c,
+    #ff8c00,
+    #ffd600,
+    #32d74b,
+    #00a7ff,
+    #5e2bff,
+    #ff2ec4,
+    #ff004c
+  );
+  background-size: 400% 100%;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  animation: hue 4s linear infinite, pulse 3s ease-in-out infinite;
+  animation: rainbow 6s linear infinite, pulse 3s ease-in-out infinite;
   filter: drop-shadow(0 0 calc(var(--size) / 10) rgba(255,255,255,0.06));
   transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
   transition: transform 120ms linear;
 }
 
-@keyframes hue {
-  0% { filter: hue-rotate(0deg) drop-shadow(0 0 calc(var(--size)/10) rgba(255,255,255,0.06)); }
-  100% { filter: hue-rotate(360deg) drop-shadow(0 0 calc(var(--size)/10) rgba(255,255,255,0.06)); }
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
 }
 
 @keyframes pulse {
