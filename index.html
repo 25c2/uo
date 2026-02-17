@@ -7,6 +7,7 @@
   <style>
     html, body {
       height: 100%;
+      min-height: 100vh;
       margin: 0;
       background: linear-gradient(180deg, #07080b 0%, #0b1020 60%);
       display: flex;
@@ -14,9 +15,11 @@
       justify-content: center;
       font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP";
       overflow: hidden;
+      padding: 1rem;
+      box-sizing: border-box;
     }
 
-    .rainbow {
+    .uo {
       position: relative;
       font-size: clamp(48px, 12vw, 160px);
       line-height: 1;
@@ -32,7 +35,7 @@
       text-shadow: 0 0 8px rgba(255, 255, 255, 0.06);
     }
 
-    .rainbow::after {
+    .uo::after {
       content: attr(data-text);
       position: absolute;
       inset: 0;
@@ -57,12 +60,30 @@
       100% { background-position: 0% 50%; }
     }
 
-    @media (max-width: 420px) {
-      .rainbow { letter-spacing: 0; }
+    @media (max-width: 768px) {
+      html, body {
+        padding: 1rem;
+      }
+      .uo {
+        padding: 0 0.1em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .uo { 
+        letter-spacing: 0;
+        padding: 0 0.05em;
+      }
+    }
+
+    @media (max-width: 320px) {
+      .uo {
+        font-size: clamp(32px, 10vw, 120px);
+      }
     }
   </style>
 </head>
 <body>
-  <h1 class="rainbow" data-text="うおｗ">うおｗ</h1>
+  <h1 class="uo" data-text="うおｗ">うおｗ</h1>
 </body>
 </html>
