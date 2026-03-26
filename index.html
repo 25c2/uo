@@ -21,6 +21,7 @@
 
     .uo {
       position: relative;
+      display: inline-block;
       font-size: clamp(48px, 12vw, 160px);
       line-height: 1;
       margin: 0;
@@ -31,25 +32,49 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      animation: rainbowSlide 6s linear infinite;
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.06);
+      animation:
+        rainbowSlide 3.4s linear infinite,
+        hypeBounce 1.2s ease-in-out infinite,
+        shakeFlash 0.14s steps(2, end) infinite;
+      filter: drop-shadow(0 0 12px rgba(255, 87, 87, 0.35))
+              drop-shadow(0 0 28px rgba(255, 0, 149, 0.28));
+      text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.08),
+        0 0 18px rgba(255, 60, 160, 0.28);
+      transform-origin: center;
     }
 
+    .uo::before,
     .uo::after {
       content: attr(data-text);
       position: absolute;
       inset: 0;
-      z-index: -1;
-      transform: translateZ(0) scale(1.02);
-      filter: blur(10px) saturate(140%);
-      opacity: 0.8;
       background: inherit;
       background-size: inherit;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      animation: rainbowSlide 6s linear infinite reverse;
       pointer-events: none;
+    }
+
+    .uo::before {
+      z-index: -2;
+      transform: scale(1.09);
+      filter: blur(24px) saturate(180%);
+      opacity: 0.95;
+      animation:
+        rainbowSlide 2.8s linear infinite reverse,
+        auraPulse 0.9s ease-in-out infinite;
+    }
+
+    .uo::after {
+      z-index: -1;
+      transform: translateZ(0) scale(1.03);
+      filter: blur(10px) saturate(160%);
+      opacity: 0.85;
+      animation:
+        rainbowSlide 3.2s linear infinite reverse,
+        auraPulse 1.1s ease-in-out infinite reverse;
       mask-image: radial-gradient(circle, white 75%, transparent 100%);
       -webkit-mask-image: radial-gradient(circle, white 75%, transparent 100%);
     }
@@ -60,12 +85,34 @@
       100% { background-position: 0% 50%; }
     }
 
+    @keyframes hypeBounce {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1) rotate(-1deg); }
+      20% { transform: translate3d(-1px, -6px, 0) scale(1.06) rotate(1.5deg); }
+      45% { transform: translate3d(3px, 2px, 0) scale(0.98) rotate(-1deg); }
+      70% { transform: translate3d(-2px, -4px, 0) scale(1.08) rotate(1deg); }
+    }
+
+    @keyframes shakeFlash {
+      0% { letter-spacing: 0.02em; }
+      50% { letter-spacing: 0.06em; }
+      100% { letter-spacing: 0.01em; }
+    }
+
+    @keyframes auraPulse {
+      0%, 100% { opacity: 0.7; transform: scale(1.02); }
+      50% { opacity: 1; transform: scale(1.14); }
+    }
+
     @media (max-width: 768px) {
       html, body {
         padding: 1rem;
       }
       .uo {
         padding: 0 0.1em;
+        animation:
+          rainbowSlide 3.8s linear infinite,
+          hypeBounce 1.3s ease-in-out infinite,
+          shakeFlash 0.18s steps(2, end) infinite;
       }
     }
 
