@@ -10,6 +10,7 @@
       --bg-1: #020611;
       --bg-2: #081426;
       --glow: rgba(255, 255, 255, 0.28);
+      --beat: 0.6666667s;
     }
 
     * {
@@ -45,8 +46,8 @@
       font-weight: 800;
       letter-spacing: 0.08em;
       animation:
-        rainbow 2.8s linear infinite,
-        bob 1.8s ease-in-out infinite;
+        rainbow calc(var(--beat) * 8) steps(1, end) infinite,
+        bob calc(var(--beat) * 4) cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
       transform-origin: center;
     }
 
@@ -72,27 +73,40 @@
     }
 
     @keyframes rainbow {
-      0% { color: hsl(0 100% 62%); }
-      16% { color: hsl(45 100% 62%); }
-      33% { color: hsl(110 100% 62%); }
-      50% { color: hsl(190 100% 62%); }
-      66% { color: hsl(255 100% 70%); }
-      83% { color: hsl(315 100% 68%); }
-      100% { color: hsl(360 100% 62%); }
+      0%, 12.5% { color: hsl(0 100% 62%); }
+      12.5001%, 25% { color: hsl(30 100% 62%); }
+      25.0001%, 37.5% { color: hsl(55 100% 62%); }
+      37.5001%, 50% { color: hsl(120 100% 62%); }
+      50.0001%, 62.5% { color: hsl(190 100% 62%); }
+      62.5001%, 75% { color: hsl(225 100% 68%); }
+      75.0001%, 87.5% { color: hsl(270 100% 72%); }
+      87.5001%, 100% { color: hsl(320 100% 68%); }
     }
 
     @keyframes bob {
       0%, 100% {
         transform: translateY(0) rotate(-2deg) scale(1);
       }
+      12.5% {
+        transform: translateY(-6px) rotate(-1deg) scale(1.01);
+      }
       25% {
-        transform: translateY(-18px) rotate(2deg) scale(1.04);
+        transform: translateY(-16px) rotate(1deg) scale(1.04);
+      }
+      37.5% {
+        transform: translateY(-4px) rotate(0deg) scale(1.01);
       }
       50% {
-        transform: translateY(0) rotate(-1deg) scale(0.98);
+        transform: translateY(10px) rotate(2deg) scale(0.98);
+      }
+      62.5% {
+        transform: translateY(4px) rotate(1deg) scale(0.995);
       }
       75% {
-        transform: translateY(18px) rotate(2deg) scale(1.04);
+        transform: translateY(-14px) rotate(1deg) scale(1.03);
+      }
+      87.5% {
+        transform: translateY(-2px) rotate(0deg) scale(1.008);
       }
     }
   </style>
